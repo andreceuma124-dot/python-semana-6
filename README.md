@@ -42,3 +42,14 @@ classDiagram
     Conta <|-- ContaCorrente : Herança
     Conta <|-- ContaPoupanca : Herança
     Conta "1" o-- "1" Cliente : Composição ("Tem um")
+
+
+📌 Justificativa das Decisões de ModelagemHerança vs.
+Composição:ContaCorrente e ContaPoupanca herdam de Conta: Aplicação da relação "é uma". Ambas partilham atributos comuns de saldo, número, depósito e levantamento.
+  Conta é composta por Cliente: Aplicação da relação "tem um" (Composição). Uma conta possui um titular do tipo Cliente, mantendo as responsabilidades bem separadas e coesas.
+  Classe Abstrata (ABC):A classe Conta utiliza o módulo abc e define o método abstrato @abstractmethod def calcular_rendimento().
+Isto garante que nenhuma conta genérica seja instanciada diretamente e obriga as subclasses a implementarem a sua própria regra de rendimento.
+🔐 Encapsulamento e Validações
+ (@property)E-mail: Validado por Expressão Regular (Regex) no setter correspondente para garantir o formato correto (utilizador@dominio.com).
+  CPF: Validado por Regex para respeitar o padrão de formatação (000.000.000-00).
+  Saldo e Saque: O saldo inicial e as operações de levantamento validam restrições de valores negativos ou saldos insuficientes, disparando exceções controladas (ValueError).   
